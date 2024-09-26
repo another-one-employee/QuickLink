@@ -1,0 +1,37 @@
+﻿@model IList<ShortLink>
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
+}
+
+<div class="text-center">
+    <div>
+        <a href="@Url.Action("Index", "Shortlink")">Create Shortlink</a>
+    </div>
+    <div style="padding-top: 20px; padding-right: 30px">
+        <table>
+            <caption></caption>
+            <tr>
+                <th id="edit" />
+                <th id="longURL">Long URl</th>
+                <th id="shortURL">Short URL</th>
+                <th id="createdAt">Created at</th>
+                <th id="clickCount">Click count</th>
+            </tr>
+            @foreach (var shortLink in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Edit" asp-controller="ShortLink" asp-route-id="@shortLink.Id" class="btn btn-sm" style="color: gray;">
+                            <img alt="edit" src="/img/edit.png" style="width: 20px; height: 20px;" class="rounded" />
+                        </a>
+                    </td>
+                    <td>@shortLink.LongURL</td>
+                    <td>@shortLink.ShortURL</td>
+                    <td>@shortLink.CreatedAt</td>
+                    <td>@shortLink.ClickCount</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
