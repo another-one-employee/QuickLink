@@ -1,7 +1,6 @@
 ﻿namespace QuickLink.Application.Exceptions
 {
-    public sealed class InvalidUrlException : Exception
+    public sealed class InvalidUrlException(string message) : Exception(message)
     {
-        public InvalidUrlException(string message) : base(message) { }
     }
 }

@@ -12,10 +12,8 @@ namespace QuickLink.Infrastructure
     {
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString(ConnectionStringNames.QuickLinkDb);
-
             services
-                .AddNHibernate(connectionString!)
+                .AddNHibernate(configuration.GetConnectionString(ConnectionStringNames.QuickLinkDb)!)
                 .AddScoped<IShortLinkRepository, ShortLinkRepository>();
 
             return services;

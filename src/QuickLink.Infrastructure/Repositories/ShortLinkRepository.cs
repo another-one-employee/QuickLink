@@ -26,7 +26,8 @@ namespace QuickLink.Infrastructure.Repositories
         public async Task<IList<ShortLink>> GetAllAsync(CancellationToken cancellationToken)
         {
             using var session = _sessionFactory.OpenSession();
-            return await session.CreateCriteria<ShortLink>()
+            return await session
+                .CreateCriteria<ShortLink>()
                 .ListAsync<ShortLink>(cancellationToken);
         }
 
@@ -34,6 +35,7 @@ namespace QuickLink.Infrastructure.Repositories
         {
             using var session = _sessionFactory.OpenSession();
             using var transaction = session.BeginTransaction();
+
             await session.UpdateAsync(shortLink, cancellationToken);
             await transaction.CommitAsync(cancellationToken);
         }
@@ -42,6 +44,7 @@ namespace QuickLink.Infrastructure.Repositories
         {
             using var session = _sessionFactory.OpenSession();
             using var transaction = session.BeginTransaction();
+
             await session.DeleteAsync(shortLink, cancellationToken);
             await transaction.CommitAsync(cancellationToken);
         }

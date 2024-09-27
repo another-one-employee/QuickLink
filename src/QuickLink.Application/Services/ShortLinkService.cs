@@ -10,9 +10,11 @@ namespace QuickLink.Application.Services
     {
         private readonly IShortLinkRepository _repository = repository;
         private readonly IMapper _mapper = mapper;
+
         private static readonly char[] _chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".ToCharArray();
         private static readonly int _length = 6;
         private static readonly Random _random = new();
+        private static readonly string _schema = "https://q.link/";
 
         public async Task CreateAsync(string longUrl, CancellationToken cancellationToken)
         {
@@ -20,10 +22,10 @@ namespace QuickLink.Application.Services
 
             if (isUrl)
             {
-                var shortUrl = GenerateShortLink();
-                var shortLink = new ShortLink(longUrl, shortUrl);
+                var shortUrl = _schema + GenerateShortLinkSegment();
+                var entity = new ShortLink(longUrl, shortUrl);
 
-                var model = _mapper.Map<Models.ShortLink>(shortLink);
+                var model = _mapper.Map<Models.ShortLink>(entity);
                 await _repository.CreateAsync(model, cancellationToken);
             }
             else
@@ -44,29 +46,34 @@ namespace QuickLink.Application.Services
             return _mapper.Map<IList<ShortLink>>(models);
         }
 
-        public async Task UpdateAsync(ShortLink shortLink, CancellationToken cancellationToken)
+        public async Task UpdateAsync(ShortLink entity, CancellationToken cancellationToken)
         {
-            var model = _mapper.Map<Models.ShortLink>(shortLink);
+            bool isUrl = Uri.IsWellFormedUriString(entity.LongUrl, UriKind.Absolute);
 
-            model.CreatedAt = DateTime.UtcNow;
-            model.ClickCount = 0;
-
+            if (isUrl)
+            {
+                var model = _mapper.Map<Models.ShortLink>(entity);
+                await _repository.UpdateAsync(model, cancellationToken);
+            }
+            else
+            {
+                throw new InvalidUrlException($"{entity.LongUrl} is not correct URL");
+            }
+        }
+        public async Task IncrementClickCountAsync(int id, CancellationToken cancellationToken)
+        {
+            var model = await _repository.GetByIdAsync(id, cancellationToken);
+            model.ClickCount++;
             await _repository.UpdateAsync(model, cancellationToken);
         }
-        public async Task IncrementClickCountAsync(ShortLink shortLink, CancellationToken cancellationToken)
-        {
-            shortLink.IncrementClickCount();
-            var model = _mapper.Map<Models.ShortLink>(shortLink);
-            await _repository.UpdateAsync(model, cancellationToken);
-        }
 
-        public async Task DeleteAsync(ShortLink shortLink, CancellationToken cancellationToken)
+        public async Task DeleteAsync(int id, CancellationToken cancellationToken)
         {
-            var model = _mapper.Map<Models.ShortLink>(shortLink);
+            var model = await _repository.GetByIdAsync(id, cancellationToken);
             await _repository.DeleteAsync(model, cancellationToken);
         }
 
-        private static string GenerateShortLink()
+        private static string GenerateShortLinkSegment()
         {
             var shortUrl = new StringBuilder(_length);
 

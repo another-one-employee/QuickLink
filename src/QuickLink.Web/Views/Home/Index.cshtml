@@ -1,37 +1,64 @@
-﻿@model IList<ShortLink>
-@{
-    ViewData["Title"] = "Home Page";
-    Layout = "_Layout";
-}
+﻿@model IndexViewModel
 
-<div class="text-center">
-    <div>
-        <a href="@Url.Action("Index", "Shortlink")">Create Shortlink</a>
+<div class="container-fluid my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form asp-action="Create" asp-controller="Home" class="mb-4 d-flex flex-column align-items-center">
+                <div class="form-group w-100">
+                    <span asp-validation-for="NewLongUrl" class="text-danger">Invalid URL entered!</span>
+                    <div class="input-group">
+                        <input type="text" asp-for="NewLongUrl" class="form-control" placeholder="Enter the link" />
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <button type="submit" class="btn btn-primary" style="background-color: #6c5ce7">Generate!</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div style="padding-top: 20px; padding-right: 30px">
-        <table>
-            <caption></caption>
-            <tr>
-                <th id="edit" />
-                <th id="longURL">Long URl</th>
-                <th id="shortURL">Short URL</th>
-                <th id="createdAt">Created at</th>
-                <th id="clickCount">Click count</th>
-            </tr>
-            @foreach (var shortLink in Model)
+</div>
+
+<div class="container-fluid my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            @if (Model.ShortLinks != null && Model.ShortLinks.Any())
             {
-                <tr>
-                    <td>
-                        <a asp-action="Edit" asp-controller="ShortLink" asp-route-id="@shortLink.Id" class="btn btn-sm" style="color: gray;">
-                            <img alt="edit" src="/img/edit.png" style="width: 20px; height: 20px;" class="rounded" />
-                        </a>
-                    </td>
-                    <td>@shortLink.LongURL</td>
-                    <td>@shortLink.ShortURL</td>
-                    <td>@shortLink.CreatedAt</td>
-                    <td>@shortLink.ClickCount</td>
-                </tr>
+                <table class="table table-sm table-striped table-hover table-bordered mb-0">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>URL</th>
+                            <th>Short link</th>
+                            <th>Created at</th>
+                            <th>Click count</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var shortLink in Model.ShortLinks)
+                        {
+                            <tr>
+                                <td style="text-align: right;">
+                                    <a asp-action="Edit" asp-controller="Home" asp-route-id="@shortLink.Id" class="btn btn-sm btn-outline-secondary">
+                                        <img alt="edit" src="/img/edit.png" style="width: 20px; height: 20px;" />
+                                    </a>
+                                </td>
+                                <td>@shortLink.LongUrl</td>
+                                <td>
+                                    <a asp-action="IncrementClickCount" asp-controller="Home" asp-route-id="@shortLink.Id" class="text-primary">@shortLink.ShortUrl</a>
+                                </td>
+                                <td>@shortLink.CreatedAt.ToString("dd.MM.yyyy HH:mm:ss")</td>
+                                <td id="clickCount-@shortLink.Id">@shortLink.ClickCount</td>
+                                <td style="text-align: left;">
+                                    <a asp-action="Delete" asp-controller="Home" asp-route-id="@shortLink.Id" class="btn btn-sm btn-outline-secondary">
+                                        <img alt="delete" src="/img/delete.png" style="width: 20px; height: 20px;" />
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             }
-        </table>
+        </div>
     </div>
 </div>

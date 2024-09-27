@@ -11,38 +11,38 @@ namespace QuickLink.Infrastructure.Mapping
         {
             Table("ShortLinks");
 
-            Id(x => x.Id, x =>
+            Id(m => m.Id, m =>
             {
-                x.Generator(Generators.Identity);
-                x.Column("Id");
+                m.Generator(Generators.Identity);
+                m.Column(nameof(ShortLink.Id));
             });
 
-            Property(sl => sl.LongURL, x =>
+            Property(sl => sl.LongUrl, m =>
             {
-                x.Type(NHibernateUtil.String);
-                x.NotNullable(true);
-                x.Column("LongURL");
+                m.Type(NHibernateUtil.String);
+                m.NotNullable(true);
+                m.Column(nameof(ShortLink.LongUrl));
             });
 
-            Property(sl => sl.ShortURL, x =>
+            Property(sl => sl.ShortUrl, m =>
             {
-                x.Type(NHibernateUtil.String);
-                x.NotNullable(true);
-                x.Column("ShortURL");
+                m.Type(NHibernateUtil.String);
+                m.NotNullable(true);
+                m.Column(nameof(ShortLink.ShortUrl));
             });
 
-            Property(sl => sl.CreatedAt, x =>
+            Property(sl => sl.CreatedAt, m =>
             {
-                x.Type(NHibernateUtil.DateTime);
-                x.NotNullable(true);
-                x.Column("CreatedAt");
+                m.Type(NHibernateUtil.DateTime);
+                m.NotNullable(true);
+                m.Column(nameof(ShortLink.CreatedAt));
             });
 
-            Property(sl => sl.ClickCount, x =>
+            Property(sl => sl.ClickCount, m =>
             {
-                x.Type(NHibernateUtil.Int32);
-                x.NotNullable(true);
-                x.Column("ClickCount");
+                m.Type(NHibernateUtil.Int32);
+                m.NotNullable(true);
+                m.Column(nameof(ShortLink.ClickCount));
             });
         }
     }

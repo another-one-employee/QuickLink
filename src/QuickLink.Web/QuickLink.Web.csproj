@@ -7,23 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\ShortLink\Index.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\QuickLink.Infrastructure\QuickLink.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Views\ShortLink\Index.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Views\ShortLink\Index.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Views\ShortLink\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

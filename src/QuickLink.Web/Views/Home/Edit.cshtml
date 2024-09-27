@@ -1,0 +1,36 @@
+﻿@model EditViewModel
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <form asp-action="Edit" asp-controller="Home" asp-route-id="@Model.Id" method="post">
+                <div class="form-group">
+                    <label asp-for="OldLongUrl" class="control-label" style="font-weight: bold;">Old URL</label>
+                    <div class="form-control-plaintext" style="border: 1px solid #ccc; padding: 5px;">@Model.OldLongUrl</div>
+                </div>
+                <div class="mb-3"></div>
+                <div class="form-row">
+                    <div class="col-md-12">
+                        <span asp-validation-for="NewLongUrl" class="text-danger">Invalid URL entered!</span>
+                        <div class="form-group">
+                            <label asp-for="NewLongUrl" class="control-label" style="font-weight: bold;">New URL</label>
+                            <input type="text" asp-for="NewLongUrl" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3"></div>
+                <div class="form-row justify-content-center">
+                    <div class="col-md-12 text-center">
+                        <div class="form-group">
+                            <button type="submit" class="btn" style="background-color: #6c5ce7; color: white">Edit</button>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" asp-for="OldLongUrl" />
+                <input type="hidden" asp-for="ShortUrl" />
+                <input type="hidden" asp-for="CreatedAt" />
+                <input type="hidden" asp-for="ClickCount" />
+            </form>
+        </div>
+    </div>
+</div>
