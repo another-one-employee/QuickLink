@@ -6,9 +6,9 @@ using System.Text;
 
 namespace QuickLink.Application.Services
 {
-    public class ShortLinkService(IShortLinkRepository repository, IMapper mapper) : IShortLinkService
+    public class ShortLinkService(IAsyncRepository<Models.ShortLink> repository, IMapper mapper) : IShortLinkService
     {
-        private readonly IShortLinkRepository _repository = repository;
+        private readonly IAsyncRepository<Models.ShortLink> _repository = repository;
         private readonly IMapper _mapper = mapper;
 
         private static readonly char[] _chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".ToCharArray();
@@ -26,7 +26,7 @@ namespace QuickLink.Application.Services
                 var entity = new ShortLink(longUrl, shortUrl);
 
                 var model = _mapper.Map<Models.ShortLink>(entity);
-                await _repository.CreateAsync(model, cancellationToken);
+                await _repository.InsertAsync(model, cancellationToken);
             }
             else
             {
@@ -36,13 +36,13 @@ namespace QuickLink.Application.Services
 
         public async Task<ShortLink> GetByIdAsync(int id, CancellationToken cancellationToken)
         {
-            var model = await _repository.GetByIdAsync(id, cancellationToken);
+            var model = await _repository.FindAsync(s => s.Id == id, cancellationToken);
             return _mapper.Map<ShortLink>(model);
         }
 
         public async Task<IList<ShortLink>> GetAllAsync(CancellationToken cancellationToken)
         {
-            var models = await _repository.GetAllAsync(cancellationToken);
+            var models = await _repository.FindAllAsync(cancellationToken);
             return _mapper.Map<IList<ShortLink>>(models);
         }
 
@@ -62,14 +62,14 @@ namespace QuickLink.Application.Services
         }
         public async Task IncrementClickCountAsync(int id, CancellationToken cancellationToken)
         {
-            var model = await _repository.GetByIdAsync(id, cancellationToken);
+            var model = await _repository.FindAsync(s => s.Id == id, cancellationToken);
             model.ClickCount++;
             await _repository.UpdateAsync(model, cancellationToken);
         }
 
         public async Task DeleteAsync(int id, CancellationToken cancellationToken)
         {
-            var model = await _repository.GetByIdAsync(id, cancellationToken);
+            var model = await _repository.FindAsync(s => s.Id == id, cancellationToken);
             await _repository.DeleteAsync(model, cancellationToken);
         }
 
