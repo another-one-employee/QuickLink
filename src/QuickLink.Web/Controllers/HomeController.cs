@@ -32,7 +32,7 @@ namespace QuickLink.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(int id, CancellationToken cancellationToken)
+        public async Task<IActionResult> Edit(Guid id, CancellationToken cancellationToken)
         {
             var shortLink = await _shortLinkService.GetByIdAsync(id, cancellationToken);
             var model = new EditViewModel()
@@ -61,14 +61,14 @@ namespace QuickLink.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
+        public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
         {
             await _shortLinkService.DeleteAsync(id, cancellationToken);
             return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
-        public async Task<IActionResult> IncrementClickCount(int id, CancellationToken cancellationToken)
+        public async Task<IActionResult> IncrementClickCount(Guid id, CancellationToken cancellationToken)
         {
             await _shortLinkService.IncrementClickCountAsync(id, cancellationToken);
 

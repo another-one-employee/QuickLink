@@ -1,8 +1,8 @@
 ﻿namespace QuickLink.Application.Entities
 {
-    public class ShortLink(string longUrl, string shortUrl, DateTime? createdAt = null, int clickCount = 0, int id = 0)
+    public class ShortLink(string longUrl, string shortUrl, DateTime? createdAt = null, int clickCount = 0, Guid id = default)
     {
-        public int Id { get; private set; } = id;
+        public Guid Id { get; private set; } = id;
 
         public string LongUrl { get; private set; } = longUrl;
 

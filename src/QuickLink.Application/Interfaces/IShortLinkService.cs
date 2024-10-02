@@ -6,14 +6,14 @@ namespace QuickLink.Application.Interfaces
     {
         Task CreateAsync(string longUrl, CancellationToken cancellationToken);
 
-        Task<ShortLink> GetByIdAsync(int id, CancellationToken cancellationToken);
+        Task<ShortLink> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 
         Task<IList<ShortLink>> GetAllAsync(CancellationToken cancellationToken);
 
         Task UpdateAsync(ShortLink entity, CancellationToken cancellationToken);
 
-        Task DeleteAsync(int id, CancellationToken cancellationToken);
+        Task DeleteAsync(Guid id, CancellationToken cancellationToken);
 
-        Task IncrementClickCountAsync(int id, CancellationToken cancellationToken);
+        Task IncrementClickCountAsync(Guid id, CancellationToken cancellationToken);
     }
 }

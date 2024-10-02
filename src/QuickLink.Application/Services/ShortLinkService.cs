@@ -34,7 +34,7 @@ namespace QuickLink.Application.Services
             }
         }
 
-        public async Task<ShortLink> GetByIdAsync(int id, CancellationToken cancellationToken)
+        public async Task<ShortLink> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
             var model = await _repository.FindAsync(s => s.Id == id, cancellationToken);
             return _mapper.Map<ShortLink>(model);
@@ -60,14 +60,14 @@ namespace QuickLink.Application.Services
                 throw new InvalidUrlException($"{entity.LongUrl} is not correct URL");
             }
         }
-        public async Task IncrementClickCountAsync(int id, CancellationToken cancellationToken)
+        public async Task IncrementClickCountAsync(Guid id, CancellationToken cancellationToken)
         {
             var model = await _repository.FindAsync(s => s.Id == id, cancellationToken);
             model.ClickCount++;
             await _repository.UpdateAsync(model, cancellationToken);
         }
 
-        public async Task DeleteAsync(int id, CancellationToken cancellationToken)
+        public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
         {
             var model = await _repository.FindAsync(s => s.Id == id, cancellationToken);
             await _repository.DeleteAsync(model, cancellationToken);
