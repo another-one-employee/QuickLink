@@ -1,12 +1,8 @@
 using QuickLink.Application;
 using QuickLink.Infrastructure;
-using QuickLink.Infrastructure.Utils;
 
 
 var builder = WebApplication.CreateBuilder(args);
-
-var dbManager = new MariaDatabaseManager(builder.Configuration);
-dbManager.EnsureDatabase();
 
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);

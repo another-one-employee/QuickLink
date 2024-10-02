@@ -1,10 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using QuickLink.Application.Models;
 using QuickLink.Application.Interfaces;
-using QuickLink.Infrastructure.Configurations;
-using QuickLink.Infrastructure.Extensions;
+using QuickLink.Infrastructure.Data;
 using QuickLink.Infrastructure.Repositories;
-using QuickLink.Infrastructure.Utils;
 
 namespace QuickLink.Infrastructure
 {
@@ -13,8 +13,10 @@ namespace QuickLink.Infrastructure
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
             services
-                .AddNHibernate(configuration.GetConnectionString(ConnectionStringNames.QuickLinkDb)!)
-                .AddScoped<IShortLinkRepository, ShortLinkRepository>();
+                .AddDbContext<ShortLinksDbContext>(options =>
+                    options.UseSqlServer(configuration.GetConnectionString(nameof(ShortLinksDbContext))))
+                .AddScoped<DbContext, ShortLinksDbContext>()
+                .AddScoped<IAsyncRepository<ShortLink>, EntityRepository<ShortLink>>();
 
             return services;
         }
