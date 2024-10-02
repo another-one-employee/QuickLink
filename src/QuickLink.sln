@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickLink.Web", "QuickLink.Web\QuickLink.Web.csproj", "{3E3CEB60-4E4C-4E95-BC77-DFD970F9566B}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickLink.Infrastructure", "QuickLink.Infrastructure\QuickLink.Infrastructure.csproj", "{0B36DB3F-91DA-4B51-A401-0085E6413F49}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickLink.Application", "QuickLink.Application\QuickLink.Application.csproj", "{BEB5C1F6-2B10-47D2-BE0A-CB7F17F8A186}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickLink.Web", "QuickLink.Web\QuickLink.Web.csproj", "{3E3CEB60-4E4C-4E95-BC77-DFD970F9566B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
