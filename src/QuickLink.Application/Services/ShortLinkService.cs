@@ -22,10 +22,7 @@ namespace QuickLink.Application.Services
 
             if (isUrl)
             {
-                var shortUrl = _schema + GenerateShortLinkSegment();
-                var entity = new ShortLink(longUrl, shortUrl);
-
-                var model = _mapper.Map<Models.ShortLink>(entity);
+                var model = await GenerateUniqueShortLink(longUrl, cancellationToken);
                 await _repository.InsertAsync(model, cancellationToken);
             }
             else
@@ -71,6 +68,21 @@ namespace QuickLink.Application.Services
         {
             var model = await _repository.FindAsync(s => s.Id == id, cancellationToken);
             await _repository.DeleteAsync(model, cancellationToken);
+        }
+
+        private async Task<Models.ShortLink> GenerateUniqueShortLink(string longUrl, CancellationToken cancellationToken)
+        {
+            string shortUrl;
+            bool isShortLinkExists;
+            do
+            {
+                shortUrl = _schema + GenerateShortLinkSegment();
+                var shortLinks = await _repository.FindAllAsync(cancellationToken);
+                isShortLinkExists = shortLinks.Select(s => s.ShortUrl).Contains(shortUrl);
+            }
+            while (isShortLinkExists);
+
+            return _mapper.Map<Models.ShortLink>(new ShortLink(longUrl, shortUrl));
         }
 
         private static string GenerateShortLinkSegment()
