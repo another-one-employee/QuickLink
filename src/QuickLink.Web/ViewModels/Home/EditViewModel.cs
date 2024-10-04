@@ -4,7 +4,7 @@ namespace QuickLink.Web.ViewModels.Home
 {
     public class EditViewModel
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string OldLongUrl { get; set; } = default!;
 

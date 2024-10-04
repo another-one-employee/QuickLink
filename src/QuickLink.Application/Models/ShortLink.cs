@@ -2,7 +2,7 @@
 {
     public class ShortLink
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string LongUrl { get; set; } = default!;
 
