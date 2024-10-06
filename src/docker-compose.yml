@@ -1,0 +1,14 @@
+services:
+  mssql:
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=1Secure*Password1
+
+  quicklink.web:
+    image: ${DOCKER_REGISTRY-}quicklinkweb
+    build:
+      context: .
+      dockerfile: QuickLink.Web/Dockerfile
+    depends_on:
+      - mssql

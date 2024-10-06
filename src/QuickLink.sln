@@ -9,12 +9,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickLink.Infrastructure", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickLink.Application", "QuickLink.Application\QuickLink.Application.csproj", "{BEB5C1F6-2B10-47D2-BE0A-CB7F17F8A186}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{4999DDB0-61B9-4ABB-89E6-84B1C2C09064}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3E3CEB60-4E4C-4E95-BC77-DFD970F9566B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E3CEB60-4E4C-4E95-BC77-DFD970F9566B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E3CEB60-4E4C-4E95-BC77-DFD970F9566B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E3CEB60-4E4C-4E95-BC77-DFD970F9566B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0B36DB3F-91DA-4B51-A401-0085E6413F49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0B36DB3F-91DA-4B51-A401-0085E6413F49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B36DB3F-91DA-4B51-A401-0085E6413F49}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -23,10 +29,10 @@ Global
 		{BEB5C1F6-2B10-47D2-BE0A-CB7F17F8A186}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEB5C1F6-2B10-47D2-BE0A-CB7F17F8A186}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEB5C1F6-2B10-47D2-BE0A-CB7F17F8A186}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3E3CEB60-4E4C-4E95-BC77-DFD970F9566B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3E3CEB60-4E4C-4E95-BC77-DFD970F9566B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3E3CEB60-4E4C-4E95-BC77-DFD970F9566B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3E3CEB60-4E4C-4E95-BC77-DFD970F9566B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4999DDB0-61B9-4ABB-89E6-84B1C2C09064}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4999DDB0-61B9-4ABB-89E6-84B1C2C09064}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4999DDB0-61B9-4ABB-89E6-84B1C2C09064}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4999DDB0-61B9-4ABB-89E6-84B1C2C09064}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
