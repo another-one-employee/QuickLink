@@ -1,0 +1,23 @@
+name: Docker image build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  docker-image-build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+    - name: Build the Docker image
+      run: |
+        docker build \
+        -t "quicklink:dev" \
+        -f "src/QuickLink.Web/Dockerfile" \
+        ${{github.workspace}}/src
