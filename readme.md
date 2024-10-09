@@ -5,6 +5,7 @@ This is a simple application for shortening long links and counting the number o
 
 <details>
 <summary>▶️ How to run</summary>
+
 1. Open Command Prompt and move to the working directory:
 ```cmd
 cd src
